@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ flyrod.model }}</span>
+        <p>Year: {{ flyrod.year }}</p>
+        <p>Line Weight: {{ flyrod.line_weight }}</p>
+        <p>{{ flyrod.description }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'flyrod_update' flyrod.id %}">Edit</a>
+        <a href="{% url 'flyrod_delete' flyrod.id %}">Delete</a>
+    </div>
+</div>
+
+{% endblock %}

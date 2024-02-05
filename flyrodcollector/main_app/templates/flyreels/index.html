@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Vintage Fly Reels</h1>
+
+{% for flyreel in flyreels %}
+<div class="card">
+  <a href="{% url 'reel_detail' flyreel.id %}"></a>
+  <div class="card-content">
+    <span class="card-title">{{ flyreel.brand }}</span>
+    <p>Model: {{ flyreel.model }}</p>
+    <p>Year: {{ flyreel.year }}</p>
+    <p>Line Weight: {{ flyreel.line_weights }}</p>
+    <p>{{ flyreel.description }}</p>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
