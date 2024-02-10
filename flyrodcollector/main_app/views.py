@@ -1,7 +1,8 @@
 from .models import Flyrod, Flyreel
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import TripForm
 
 
 def home(request):
@@ -20,7 +21,8 @@ def flyreels_index(request):
 
 def rod_detail(request, flyrod_id):
     flyrod = Flyrod.objects.get(id=flyrod_id)
-    return render(request, 'flyrods/rod_detail.html', {'flyrod': flyrod})
+    trip_form = TripForm()
+    return render(request, 'flyrods/rod_detail.html', {'flyrod': flyrod, 'trip_form': trip_form})
 
 def reel_detail(request, flyreel_id):
     flyreel = Flyreel.objects.get(id=flyreel_id)
@@ -37,3 +39,23 @@ class RodUpdate(UpdateView):
 class RodDelete(DeleteView):
     model = Flyrod
     success_url = '/flyrods/'
+
+class ReelCreate(CreateView):
+    model= Flyreel
+    fields = '__all__'
+
+class ReelUpdate(UpdateView):
+    model = Flyreel
+    fields = '__all__'
+
+class ReelDelete(DeleteView):
+    model = Flyreel
+    success_url = '/flyrods/'
+
+def add_trip(request, flyrod_id):
+  form = TripForm(request.POST)
+  if form.is_valid():
+    new_trip = form.save(commit=False)
+    new_trip.flyrod_id = flyrod_id
+    new_trip.save()
+  return redirect('rod_detail', flyrod_id=flyrod_id)

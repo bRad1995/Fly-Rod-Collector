@@ -11,4 +11,8 @@ urlpatterns = [
     path('flyrods/create/', views.RodCreate.as_view(), name='flyrod_create'),
     path('flyrods/<int:pk>/update/', views.RodUpdate.as_view(), name='flyrod_update'),
     path('flyrods/<int:pk>/delete/', views.RodDelete.as_view(), name='flyrod_delete'),
+    path('flyreels/create/', views.ReelCreate.as_view(), name='flyreel_create'),
+    path('flyreels/<int:pk>/update/', views.ReelUpdate.as_view(), name='flyreel_update'),
+    path('flyreels/<int:pk>/delete/', views.ReelDelete.as_view(), name='flyreel_delete'),
+    path('flyrods/<int:flyrod_id>/add_trip/', views.add_trip, name='add_trip'),
 ]
